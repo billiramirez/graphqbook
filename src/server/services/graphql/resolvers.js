@@ -1,3 +1,5 @@
+import logger from '../../helpers/logger';
+
 // eslint-disable-next-line prefer-const
 let posts = [
   {
@@ -32,6 +34,7 @@ const resolvers = {
         id: posts.length + 1,
       };
       posts.push(postObject);
+      logger.log({ level: 'info', message: 'Post was created' });
       return postObject;
     },
   },
