@@ -6,10 +6,12 @@
   "scripts": {
     "client": "webpack-dev-server --devtool inline-source-map --hot --config webpack.client.config.js",
     "client:build": "webpack --config webpack.client.build.config.js",
-    "server": "nodemon --exec babel-node --plugins require-context-hook --watch src/server src/server/index.js",
+    "server": "nodemon --exec babel-node --watch src/server src/server/index.js",
     "stats": "webpack --profile --json --config webpack.client.build.config.js > stats.json",
     "analyze": "webpack-bundle-analyzer stats.json",
-    "db:start": "docker run -d -p 3306:3306 --name=mysql-server --env=MYSQL_ROOT_PASSWORD=123456 mysql --default-authentication-plugin=mysql_native_password"
+    "db:start": "docker run -d -p 3306:3306 --name=mysql-server --env=MYSQL_ROOT_PASSWORD=123456 mysql --default-authentication-plugin=mysql_native_password",
+    "db:seed": "sequelize db:seed:all --seeders-path src/server/seeders --config src/server/config/index.js",
+    "db:migrate": "sequelize db:migrate --migrations-path src/server/migrations --config src/server/config/index.js"
   },
   "author": "",
   "license": "ISC",

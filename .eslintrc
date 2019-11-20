@@ -5,6 +5,7 @@
     "node": true
   },
   "rules": {
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "global-require": 0
   }
 }

@@ -1,9 +1,6 @@
 import Sequelize from 'sequelize';
 
-if (process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line global-require
-  require('babel-plugin-require-context-hook/register')();
-}
+require('babel-plugin-require-context-hook/register')();
 
 export default (sequelize) => {
   const db = {};

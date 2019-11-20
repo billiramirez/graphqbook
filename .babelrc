@@ -9,8 +9,10 @@
     "@babel/plugin-proposal-throw-expressions",
     ["@babel/plugin-proposal-class-properties", {
       "loose": false
-    }]
+    }],
+    "require-context-hook",
   ],
   "presets": ["@babel/env", "@babel/react"]
+
 
 }
