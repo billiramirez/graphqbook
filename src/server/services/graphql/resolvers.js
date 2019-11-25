@@ -1,43 +1,37 @@
 import logger from '../../helpers/logger';
 
 // eslint-disable-next-line prefer-const
-let posts = [
-  {
-    id: 2,
-    text: 'lorem',
-    user: {
-      avatar: '/uploads/avatar1.png',
-      username: 'Test User',
-    },
-  },
-  {
-    id: 1,
-    text: 'Lorem ipsum',
-    user: {
-      avatar: '/uploads/avatar2.png',
-      username: 'Test User 2',
-    },
-  },
-];
 
-const resolvers = {
-  RootQuery: {
-    posts(root, args, context) {
-      return posts;
+export default function resolver() {
+  const { db } = this;
+  const { Post, User } = db.models;
+  const resolvers = {
+    Post: {
+      user(post, args, context) {
+        return post.getUser();
+      },
     },
-  },
-  RootMutation: {
-    addPost(root, { post, user }, context) {
-      const postObject = {
-        ...post,
-        user,
-        id: posts.length + 1,
-      };
-      posts.push(postObject);
-      logger.log({ level: 'info', message: 'Post was created' });
-      return postObject;
+    RootQuery: {
+      posts(root, args, context) {
+        return Post.findAll({ order: [['createdAt', 'DESC']] });
+      },
     },
-  },
-};
+    RootMutation: {
+      addPost(root, { post }, context) {
+        logger.log({
+          level: 'info',
+          message: 'Post was created',
+        });
 
-export default resolvers;
+        return User.findAll().then((users) => {
+          const usersRow = users[0];
+
+          return Post.create({
+            ...post,
+          }).then((newPost) => Promise.all([newPost.setUser(usersRow.id)]).then(() => newPost),);
+        });
+      },
+    },
+  };
+  return resolvers;
+}

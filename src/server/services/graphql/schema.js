@@ -4,6 +4,7 @@ const typeDefinitions = `
   }
 
   input UserInput {
+    id: Int
     username: String!
     avatar: String!
   }
