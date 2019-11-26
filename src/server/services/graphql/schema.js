@@ -2,6 +2,10 @@ const typeDefinitions = `
   input ChatInput {
     users: [Int]
   }
+  input MessageInput {
+    text: String!
+    chatId: Int!
+  }
 
   input PostInput {
     text: String!
@@ -46,6 +50,9 @@ const typeDefinitions = `
     addChat (
       chat: ChatInput!
     ): Chat
+    addMessage (
+      message: MessageInput!
+    ): Message
   }
 
   type RootQuery {
