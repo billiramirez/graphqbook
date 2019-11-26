@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import Feed from './Feed';
 
 import '../../assets/css/style.css';
 
@@ -15,6 +16,7 @@ export default class App extends Component {
             content="Newsfeed of all your friends on Graphbook"
           />
         </Helmet>
+        <Feed />
       </div>
     );
   }
