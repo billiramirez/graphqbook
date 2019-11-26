@@ -79,6 +79,13 @@ export default function resolver() {
           }).then((newPost) => Promise.all([newPost.setUser(usersRow.id)]).then(() => newPost),);
         });
       },
+      addChat(root, { chat }, context) {
+        logger.log({
+          level: 'info',
+          message: 'Message was Created',
+        });
+        return Chat.create().then((newChat) => Promise.all([newChat.setUsers(chat.users)]).then(() => newChat),);
+      },
     },
   };
   return resolvers;
