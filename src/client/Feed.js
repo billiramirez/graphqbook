@@ -58,7 +58,7 @@ class Feed extends Component {
     return (
       <div className="container">
         <div className="postForm">
-          <Mutation mutation={ADD_POST}>
+          <Mutation mutation={ADD_POST} refetchQueries={[{ query: GET_POSTS }]}>
             {addPost => (
               <form
                 onSubmit={e => {
